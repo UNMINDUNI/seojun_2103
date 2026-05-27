@@ -301,14 +301,14 @@ export default function NamuWiki() {
             <div ref={footnoteRefs.fn1} className="flex gap-2 p-1.5 rounded transition-colors">
               <span className="font-bold text-[#00a29c] shrink-0 font-mono">[1]</span>
               <p>
-                이날 극장에서 통편집된 본인의 뒤통수를 보고 충격받아 포장마차에서 엄청 오열했다고 전해진다. (※ U가 데이트 비용 내주고 같이 포장마차에서 달래줬던 그날)
+                이날 극장에서 통편집된 본인의 뒤통수를 보고 충격받아 포장마차에서 엄청 오열했다고 전해진다. (※ 애착인형이 데이트 비용 내주고 같이 포장마차에서 달래줬던 그날)
               </p>
             </div>
 
             <div ref={footnoteRefs.fn2} className="flex gap-2 p-1.5 rounded transition-colors">
               <span className="font-bold text-[#00a29c] shrink-0 font-mono">[2]</span>
               <p>
-                실제로 당시 본인 현실 연애에서 첫 이별을 겪고 밤새 슬퍼 바닥을 격렬하게 기고 있었다 카더라. (※ U와 다퉜던 당시)
+                실제로 당시 본인 현실 연애에서 첫 이별을 겪고 밤새 슬퍼 바닥을 격렬하게 기고 있었다 카더라. (※ 애착인형과 다퉜던 당시)
               </p>
             </div>
 
@@ -335,7 +335,7 @@ export default function NamuWiki() {
             <div ref={footnoteRefs.fn5} className="flex gap-2 p-1.5 rounded transition-colors">
               <span className="font-bold text-[#00a29c] shrink-0 font-mono">[5]</span>
               <p>
-                소파 쿠션 옆에 남자 사이즈가 아닌 작은 사이즈의 수면 양말이 포착되어 잠깐 실시간 난리가 났으나, 소속사가 &apos;여성 코디의 것&apos;이라고 빛의 속도로 해명했다. (※ 실체는 2103호에 동거 중인 연인 U의 귀여운 수면 양말)
+                소파 쿠션 옆에 남자 사이즈가 아닌 작은 사이즈의 수면 양말이 포착되어 잠깐 실시간 난리가 났으나, 소속사가 &apos;여성 코디의 것&apos;이라고 빛의 속도로 해명했다. (※ 실체는 2103호에 동거 중인 연인 애착인형의 귀여운 수면 양말)
               </p>
             </div>
 

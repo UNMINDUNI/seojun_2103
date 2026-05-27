@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Instagram, Search, Award, Calendar, User, Heart, Briefcase, ExternalLink, RefreshCw, ChevronRight } from "lucide-react";
 import { motion } from "motion/react";
+
+const KANG_SE_JUN_PHOTOS = [
+  "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
+  "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
+  "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
+  "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
+  "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
+  "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
+  "https://i.postimg.cc/DyzkBMtG/IMG-4.webp"
+];
 
 interface NaverProfileProps {
   onInstagramClick: () => void;
 }
 
 export default function NaverProfile({ onInstagramClick }: NaverProfileProps) {
+  const [profilePhoto, setProfilePhoto] = useState(() => {
+    const saved = localStorage.getItem("naver_profile_photo");
+    if (saved) return saved;
+    // pick one random photo
+    return KANG_SE_JUN_PHOTOS[Math.floor(Math.random() * KANG_SE_JUN_PHOTOS.length)];
+  });
+  const [isEditingPhoto, setIsEditingPhoto] = useState(false);
+  const [customPhotoUrl, setCustomPhotoUrl] = useState("");
   return (
     <div id="naver-profile-section" className="bg-[#f0f2f5] min-h-screen text-[#1e1e1e] font-sans">
       {/* Naver Style Header */}
@@ -65,19 +83,86 @@ export default function NaverProfile({ onInstagramClick }: NaverProfileProps) {
           <div className="p-4 sm:p-6">
             <div className="flex flex-col md:flex-row gap-6">
               {/* Photo & Simple links */}
-              <div className="flex flex-col items-center">
-                <div className="relative w-40 h-52 bg-gradient-to-tr from-slate-100 to-slate-200 rounded border border-gray-200 overflow-hidden shadow-inner flex items-center justify-center">
-                  {/* Styled minimalist face silhouette for actor */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#151c24] text-white">
-                    <div className="w-24 h-24 rounded-full bg-slate-700/60 flex items-center justify-center border border-slate-500/30 overflow-hidden relative mb-2">
-                      <User className="w-16 h-16 text-slate-300 translate-y-2" />
-                    </div>
-                    <span className="text-xs tracking-wider text-slate-300 font-medium">HS Entertainment</span>
-                    <span className="text-[10px] text-slate-400 mt-0.5">강서준 (영화배우)</span>
-                    {/* Atmospheric lighting highlight */}
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-black/70 mix-blend-multiply"></div>
+              <div className="flex flex-col items-center shrink-0">
+                <div className="relative w-40 h-52 rounded border border-gray-200 overflow-hidden shadow-md flex items-center justify-center bg-slate-900 group">
+                  <img
+                    src={profilePhoto} 
+                    alt="강서준 프로필"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay Option panel on Hover */}
+                  <div className="absolute inset-0 bg-black/65 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-center items-center gap-1.5 p-2 z-10">
+                    <button
+                      onClick={() => {
+                        const currentIdx = KANG_SE_JUN_PHOTOS.indexOf(profilePhoto);
+                        const nextIdx = (currentIdx + 1) % KANG_SE_JUN_PHOTOS.length;
+                        const nextPhoto = KANG_SE_JUN_PHOTOS[nextIdx];
+                        setProfilePhoto(nextPhoto);
+                        localStorage.setItem("naver_profile_photo", nextPhoto);
+                      }}
+                      className="w-full py-1 text-[9.5px] bg-white text-slate-900 hover:bg-slate-50 font-extrabold rounded shadow-xs flex items-center justify-center gap-1 cursor-pointer transition-colors"
+                    >
+                      <RefreshCw className="w-2.5 h-2.5 text-[#03c75a]" />
+                      <span>프로필 사진 전환</span>
+                    </button>
+                    <button
+                      onClick={() => setIsEditingPhoto(true)}
+                      className="w-full py-1 text-[9.5px] bg-[#03c75a] text-white hover:bg-[#02be55] font-extrabold rounded shadow-xs flex items-center justify-center gap-1 cursor-pointer transition-colors"
+                    >
+                      <span>직접 사진 넣기</span>
+                    </button>
                   </div>
                 </div>
+
+                {isEditingPhoto && (
+                  <div className="mt-2 text-left bg-white border border-gray-200 rounded p-2 shadow-lg max-w-[170px] z-20 relative">
+                    <label className="block text-[9px] font-black text-gray-400 mb-1">직접 이미지 URL 입력</label>
+                    <input
+                      type="text"
+                      value={customPhotoUrl}
+                      onChange={(e) => setCustomPhotoUrl(e.target.value)}
+                      placeholder="https://..."
+                      className="w-full text-[10px] border border-gray-300 rounded p-1 mb-1.5 focus:outline-none focus:border-[#03c75a] bg-slate-50 font-medium"
+                    />
+                    
+                    {/* Tiny thumbnails selector for convenience */}
+                    <div className="flex gap-1 overflow-x-auto mb-2 py-0.5 scrollbar-none">
+                      {KANG_SE_JUN_PHOTOS.map((url, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setCustomPhotoUrl(url)}
+                          className="w-5 h-5 rounded-sm border border-slate-200 overflow-hidden shrink-0 hover:border-[#03c75a]"
+                        >
+                          <img src={url} alt="" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="flex gap-1 justify-end">
+                      <button
+                        onClick={() => setIsEditingPhoto(false)}
+                        className="text-[9px] bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-1.5 py-0.5 rounded cursor-pointer"
+                      >
+                        취소
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (customPhotoUrl.trim()) {
+                            setProfilePhoto(customPhotoUrl.trim());
+                            localStorage.setItem("naver_profile_photo", customPhotoUrl.trim());
+                          }
+                          setIsEditingPhoto(false);
+                        }}
+                        className="text-[9px] bg-[#03c75a] text-white hover:bg-[#02be55] font-bold px-1.5 py-0.5 rounded cursor-pointer"
+                      >
+                        적용
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="mt-3 text-xs font-semibold text-gray-500 flex items-center gap-1.5 py-1 px-3 bg-gray-50 border border-gray-100 rounded-full">
                   <span>공식 홈페이지</span>
                   <ExternalLink className="w-3 h-3 text-gray-400" />
@@ -139,7 +224,7 @@ export default function NaverProfile({ onInstagramClick }: NaverProfileProps) {
                           className="relative p-2.5 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white hover:shadow-md cursor-pointer flex items-center gap-2 font-bold text-xs"
                         >
                           <Instagram className="w-4 h-4" />
-                          <span>서준 인스타그램 이동</span>
+                          <span>가상 인스타그램 이동</span>
                           
                           {/* Pulsing indicator ring to guide action */}
                           <span className="absolute -top-1 -right-1 flex h-3 w-3">

@@ -33,56 +33,252 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
-  // Secret Posts Database
-  const [secretPosts, setSecretPosts] = useState<SecretPost[]>([
-    {
-      id: "secret-1",
-      imageUrl: "socks",
-      caption: "매니저 형이나 코디 누나 거 절대 아님 😤 왜 이 다 자란 남자의 거대한 소파 구텡이에 꽁꽁 숨어있는 요 쬐그맣고 달콤한 수면 양말 한 짝이 내 생명줄 같은지 모르겠네. 2103호의 진짜 주인 발자국... 얼른 퇴근해라, 양말 주인이여! 🧦❤️ #2103호 #퇴근시급 #수면양말스캔들",
-      likes: 12,
-      commentsCount: 2,
-      date: "2026.05.15",
-      comments: [
-        { id: "c1-1", username: "U", text: "어젯밤 소파에서 발 시리다고 징징대더니 기어코 찾아다 찍었네ㅋㅋㅋ 치워놓으랬지!", time: "10분 전", isUser: true },
-        { id: "c1-2", username: "seojun_2103", text: "절대 못 치워. 이거 소파 붙박이 인테리어야. 네 향기가 남아 있어야 힘이 난단 말야... 빨지도 마!", time: "8분 전" }
-      ]
-    },
-    {
-      id: "secret-2",
-      imageUrl: "crying",
-      caption: "2025년 6월 비 오던 칠흑 같은 밤 🌧️ 소속사 대표님한테 '메소드 연기 리딩 연습' 중이었다고 기사 막히자마자 현민이 형한테 욕을 욕을 바가지로 먹었네... 진짜 나 버리고 나갔을 때 억장 무너졌던 날. 이 빌라 앞 가로등 아래서 우산도 없이 가위바위보 진 애처럼 울어댔지. 기어이 문 안 열어줄까 봐 심장 탈수 올 뻔했잖아. 다시는 내 손 놓지 마. 죽어도 안 나줄 테니까.",
-      likes: 45,
-      commentsCount: 3,
-      date: "2025.06.28",
-      comments: [
-        { id: "c2-1", username: "U", text: "이 흑역사를 또 소환하네.. 동네 시끄럽게 소리 소리 지르고 현관문이 구멍 날 정도로 쳐대서 경찰 신고당할까 봐 열어준 줄 알아라 바보야.", time: "1일 전", isUser: true },
-        { id: "c2-2", username: "seojun_2103", text: "그럼 어떡해, 네가 나 차단하고 번호 바꾸고 짐 다 싸고 나갔잖아. 톱배우고 청룡이고 나발이고 너 없으면 나 껍데기야 껍데기.", time: "18시간 전" },
-        { id: "c2-3", username: "U", text: "그래 알아, 그날부터 우리 튼튼한 자물쇠 새로 맞췄다 아주.", time: "15시간 전", isUser: true }
-      ]
-    },
-    {
-      id: "secret-3",
-      imageUrl: "knit",
-      caption: "패션 브랜드 협찬에 수백만 원짜리 명품 에디션이 쌓여있으면 뭐하나. 내 운명의 갑옷은 네가 6년 전 무명 때 첫 피땀 흘린 아르바이트 월급 털어 사줬던 이 한 조각 네이비 니트뿐인데. 🧶 목이 살짝 늘어나서 소속사 대표님은 기절하시려고 하지만, 대본 리딩이며 대작 촬영 전날 밤에 난 무조건 이걸 입어야만 심장이 가라앉아. 내 모든 시작과 간절함을 바친 네가 한 땀 한 땀 서려 있으니까. 평생 수선해주고 꿰매줘야 돼.",
-      likes: 38,
-      commentsCount: 1,
-      date: "2026.04.12",
-      comments: [
-        { id: "c3-1", username: "U", text: "아니.. 보풀 제거기라도 좀 돌리게 줘보라고 진짜ㅋㅋㅋ 리딩 목격 기사에 니트 헤진 거 팬들이 보고 HS엔터 가난하냐고 난리났단 말야ㅋㅋㅋ", time: "3일 전", isUser: true }
-      ]
-    },
-    {
-      id: "secret-4",
-      imageUrl: "hanriver",
-      caption: "너랑 한강 돗자리에 쭈그려 누워 캔맥주에 편의점 떡볶이 먹던 그 가을 바람. 내 네이버 공식 프로필 이상형이 왜 '츄리닝에 캔맥주 하나 들고 한강 걷기'로 고정되었는지 세상 사람들은 절대 모른다. 눈앞의 한강 뷰 펜트하우스를 사서 거실 열쇠고리를 바치기까지 먼 길도 너랑 손잡고 캔맥주 홀짝이던 발걸음이 있었네. 사랑한다, 세상에서 가장 따뜻하고 편안한 내 구세주.",
-      likes: 56,
-      commentsCount: 1,
-      date: "2026.02.04",
-      comments: [
-        { id: "c4-1", username: "U", text: "나도 가끔 그 포장마차랑 돗자리가 눈물 나게 그립더라. 지금 한강뷰 최고급 소파 위에서 뒹굴거리는 것도 눈부시게 좋은데, 우린 여전히 그대로네.", time: "4주 전", isUser: true }
-      ]
+  // States to allow pasting or choosing new feed images
+  const [editingPostId, setEditingPostId] = useState<string | null>(null);
+  const [editImageUrlInput, setEditImageUrlInput] = useState<string>("");
+  
+  // State for creating a new post
+  const [showAddPostForm, setShowAddPostForm] = useState<boolean>(false);
+  const [newPostTab, setNewPostTab] = useState<"official" | "private">("official");
+  const [newPostCaption, setNewPostCaption] = useState<string>("");
+  const [newPostImgUrl, setNewPostImgUrl] = useState<string>("");
+  const [newPostTitle, setNewPostTitle] = useState<string>("");
+  const [newPostCategory, setNewPostCategory] = useState<string>("");
+
+  // Official dynamic feed entries with real WebP photos
+  const [officialPosts, setOfficialPosts] = useState<SecretPost[]>(() => {
+    const saved = localStorage.getItem("insta_official_posts");
+    if (saved) return JSON.parse(saved);
+    return [
+      {
+        id: "off-1",
+        category: "현재 방영",
+        title: "SBS 드라마 《연애의 온도차》",
+        subtitle: '"차도윤 본부장역 강서준 배우 스틸컷 대공개"',
+        badge: "매주 수목 밤 10시 본방사수!",
+        likes: 12023,
+        commentsCount: 2,
+        date: "2026.05.27",
+        imageUrl: "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
+        caption: "오늘 밤 도윤과 은하의 대망의 한강 다리 키스신 방출 예고!! 후끈한 온도의 차이 함께 느껴보실래요? 😉",
+        comments: [
+          { id: "c-off1-1", username: "dorama_fan", text: "본방사수 갑니다 키스신 벌써 내 도파민 한도초과!!", time: "1시간 전" },
+          { id: "c-off1-2", username: "hs_love", text: "서준 최고 존엄 강서준 꽃길만 걷자아아", time: "30분 전" }
+        ]
+      },
+      {
+        id: "off-2",
+        category: "남우주연상 수상",
+        title: "제46회 청룡영화상 남우주연상",
+        subtitle: '영화 《무경계》 (정태수 역)',
+        badge: "최고의 연기 찬사",
+        likes: 38549,
+        commentsCount: 1,
+        date: "2025.11.25",
+        imageUrl: "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
+        caption: "청룡의 영광을 안겨주신 천만 관객 여러분들과 정태수를 사랑해 주신 모든 분들께 머리 숙여 감사드립니다. 더 겸손하게 깊이 배우겠습니다.",
+        comments: [
+          { id: "c-off2-1", username: "cinema_mania", text: "태수 악역은 진짜 한국 영화 역사상 최강 소름이었습니다!", time: "3일 전" }
+        ]
+      },
+      {
+        id: "off-3",
+        category: "천만 돌파",
+        title: "영화 《무경계》 (無境界)",
+        subtitle: "정태수 역 핏빛 독전 스틸컷",
+        badge: "천만 관객 신화",
+        likes: 45781,
+        commentsCount: 0,
+        date: "2025.10.12",
+        imageUrl: "https://i.postimg.cc/DyzkBMtG/IMG-4.webp",
+        caption: "느와르의 새로운 한 획 《무경계》가 마침내 꿈의 스코어 1,000만을 달성했습니다! 핏빛 연기를 극한으로 선보인 서준 배우 감사패 증정.",
+        comments: []
+      },
+      {
+        id: "off-4",
+        category: "드라마 명작",
+        title: "tvN 드라마 《붉은 달, 그림자》",
+        subtitle: '"서브 영웅, 호위무사 무영"',
+        badge: "신드롬 급 서브남주",
+        likes: 29841,
+        commentsCount: 0,
+        date: "2023.09.04",
+        imageUrl: "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
+        caption: "서글픈 서브남신의 정석, 무영의 마지막 희생 장면 비하인드 컷입니다. 아직도 수많은 팬들의 가슴을 에이게 하는 처연하고 맹목적인 눈빛!",
+        comments: []
+      },
+      {
+        id: "off-5",
+        category: "뉴스컷 리포트",
+        title: '"늘어난 네이비 니트 스캔들?!"',
+        subtitle: "소속사 측 '강서준의 오랜 애착템일 뿐, 과도한 추측 자제'",
+        badge: "이상형의 재발견",
+        likes: 18240,
+        commentsCount: 0,
+        date: "2026.04.18",
+        imageUrl: "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
+        caption: "강서준 배우의 최애템(네이비 니트)은 늘 완벽하게 리폼된 유니크 디자인으로 팬들의 조공 리스트 상위권에 머물러 있습니다. 😄",
+        comments: []
+      },
+      {
+        id: "off-6",
+        category: "네이버 독점 인터뷰",
+        title: "“츄리닝에 한강 캔맥주가 완벽한 내 이상형”",
+        subtitle: "강서준 친서민 소탈 발언",
+        badge: "이상형 공개 화제",
+        likes: 24719,
+        commentsCount: 0,
+        date: "2025.08.30",
+        imageUrl: "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
+        caption: "배우가 직접 참여한 네이버 독점 프로필 스토리입니다. 편안하고 소소한 일상을 함께 걸어가 주는 헌신적인 사랑이 이상향이라고 밝혔습니다.",
+        comments: []
+      }
+    ];
+  });
+
+  // Secret Posts Database (with real WebP photos and updated names)
+  const [secretPosts, setSecretPosts] = useState<SecretPost[]>(() => {
+    const saved = localStorage.getItem("insta_secret_posts");
+    if (saved) return JSON.parse(saved);
+    return [
+      {
+        id: "secret-1",
+        imageUrl: "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
+        caption: "매니저 형이나 코디 누나 거 절대 아님 😤 왜 이 다 자란 남자의 거대한 소파 구텡이에 꽁꽁 숨어있는 요 쬐그맣고 달콤한 수면 양말 한 짝이 내 생명줄 같은지 모르겠네. 2103호의 진짜 주인 발자국... 얼른 퇴근해라, 양말 주인이여! 🧦❤️ #2103호 #퇴근시급 #수면양말스캔들",
+        likes: 12,
+        commentsCount: 2,
+        date: "2026.05.15",
+        comments: [
+          { id: "c1-1", username: "애착인형", text: "어젯밤 소파에서 발 시리다고 징징대더니 기어코 찾아다 찍었네ㅋㅋㅋ 치워놓으랬지!", time: "10분 전", isUser: true },
+          { id: "c1-2", username: "seojun_2103", text: "절대 못 치워. 이거 소파 붙박이 인테리어야. 네 향기가 남아 있어야 힘이 난단 말야... 빨지도 마!", time: "8분 전" }
+        ]
+      },
+      {
+        id: "secret-2",
+        imageUrl: "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
+        caption: "2025년 6월 비 오던 칠흑 같은 밤 🌧️ 소속사 대표님한테 '메소드 연기 리딩 연습' 중이었다고 기사 막히자마자 현민이 형한테 욕을 욕을 바가지로 먹었네... 진짜 나 버리고 나갔을 때 억장 무너졌던 날. 이 빌라 앞 가로등 아래서 우산도 없이 가위바위보 진 애처럼 울어댔지. 기어이 문 안 열어줄까 봐 심장 탈수 올 뻔했잖아. 다시는 내 손 놓지 마. 죽어도 안 나줄 테니까.",
+        likes: 45,
+        commentsCount: 3,
+        date: "2025.06.28",
+        comments: [
+          { id: "c2-1", username: "애착인형", text: "이 흑역사를 또 소환하네.. 동네 시끄럽게 소리 소리 지르고 현관문이 구멍 날 정도로 쳐대서 경찰 신고당할까 봐 열어준 줄 알아라 바보야.", time: "1일 전", isUser: true },
+          { id: "c2-2", username: "seojun_2103", text: "그럼 어떡해, 네가 나 차단하고 번호 바꾸고 짐 다 싸고 나갔잖아. 톱배우고 청룡이고 나발이고 너 없으면 나 껍데기야 껍데기.", time: "18시간 전" },
+          { id: "c2-3", username: "애착인형", text: "그래 알아, 그날부터 우리 튼튼한 자물쇠 새로 맞췄다 아주.", time: "15시간 전", isUser: true }
+        ]
+      },
+      {
+        id: "secret-3",
+        imageUrl: "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
+        caption: "패션 브랜드 협찬에 수백만 원짜리 명품 에디션이 쌓여있으면 뭐하나. 내 운명의 갑옷은 네가 6년 전 무명 때 첫 피땀 흘린 아르바이트 월급 털어 사줬던 이 한 조각 네이비 니트뿐인데. 🧶 목이 살짝 늘어나서 소속사 대표님은 기절하시려고 하지만, 대본 리딩이며 대작 촬영 전날 밤에 난 무조건 이걸 입어야만 심장이 가라앉아. 내 모든 시작과 간절함을 바친 네가 한 땀 한 땀 서려 있으니까. 평생 수선해주고 꿰매줘야 돼.",
+        likes: 38,
+        commentsCount: 1,
+        date: "2026.04.12",
+        comments: [
+          { id: "c3-1", username: "애착인형", text: "아니.. 보풀 제거기라도 좀 돌리게 줘보라고 진짜ㅋㅋㅋ 리딩 목격 기사에 니트 헤진 거 팬들이 보고 HS엔터 가난하냐고 난리났단 말야ㅋㅋㅋ", time: "3일 전", isUser: true }
+        ]
+      },
+      {
+        id: "secret-4",
+        imageUrl: "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
+        caption: "너랑 한강 돗자리에 쭈그려 누워 캔맥주에 편의점 떡볶이 먹던 그 가을 바람. 내 네이버 공식 프로필 이상형이 왜 '츄리닝에 캔맥주 하나 들고 한강 걷기'로 고정되었는지 세상 사람들은 절대 모른다. 눈앞의 한강 뷰 펜트하우스를 사서 거실 열쇠고리를 바치기까지 먼 길도 너랑 손잡고 캔맥주 홀짝이던 발걸음이 있었네. 사랑한다, 세상에서 가장 따뜻하고 편안한 내 구세주.",
+        likes: 56,
+        commentsCount: 1,
+        date: "2026.02.04",
+        comments: [
+          { id: "c4-1", username: "애착인형", text: "나도 가끔 그 포장마차랑 돗자리가 눈물 나게 그립더라. 지금 한강뷰 최고급 소파 위에서 뒹굴거리는 것도 눈부시게 좋은데, 우린 여전히 그대로네.", time: "4주 전", isUser: true }
+        ]
+      }
+    ];
+  });
+
+  // Save states to localStorage for persistence
+  useEffect(() => {
+    localStorage.setItem("insta_secret_posts", JSON.stringify(secretPosts));
+  }, [secretPosts]);
+
+  useEffect(() => {
+    localStorage.setItem("insta_official_posts", JSON.stringify(officialPosts));
+  }, [officialPosts]);
+
+  // Handle image shuffling randomly from the 7 WebP array
+  const handleShuffleAllPhotos = () => {
+    const urls = [
+      "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
+      "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
+      "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
+      "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
+      "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
+      "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
+      "https://i.postimg.cc/DyzkBMtG/IMG-4.webp"
+    ];
+
+    setOfficialPosts((prev) =>
+      prev.map((post) => {
+        const rand = urls[Math.floor(Math.random() * urls.length)];
+        return { ...post, imageUrl: rand };
+      })
+    );
+
+    setSecretPosts((prev) =>
+      prev.map((post) => {
+        const rand = urls[Math.floor(Math.random() * urls.length)];
+        return { ...post, imageUrl: rand };
+      })
+    );
+  };
+
+  // Helper inside VirtualInstagram to apply photo edits
+  const handleApplyPhotoEdit = (postId: string, newUrl: string) => {
+    if (!newUrl.trim()) return;
+
+    setOfficialPosts((prev) =>
+      prev.map((p) => (p.id === postId ? { ...p, imageUrl: newUrl } : p))
+    );
+
+    setSecretPosts((prev) =>
+      prev.map((p) => (p.id === postId ? { ...p, imageUrl: p.imageUrl.startsWith("http") || p.imageUrl === "socks" || p.imageUrl === "crying" || p.imageUrl === "knit" || p.imageUrl === "hanriver" ? newUrl : p.imageUrl } : p))
+    );
+
+    if (selectedPost && selectedPost.id === postId) {
+      setSelectedPost({ ...selectedPost, imageUrl: newUrl });
     }
-  ]);
+
+    setEditingPostId(null);
+    setEditImageUrlInput("");
+  };
+
+  // Helper to create a brand new custom post with caption and photo URL
+  const handleAddNewPostSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newPostCaption.trim() || !newPostImgUrl.trim()) return;
+
+    const newPost: SecretPost = {
+      id: `custom-post-${Date.now()}`,
+      imageUrl: newPostImgUrl.trim(),
+      caption: newPostCaption.trim(),
+      likes: Math.floor(Math.random() * 500) + 12,
+      commentsCount: 0,
+      date: new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/ /g, ""),
+      comments: [],
+      title: newPostTitle.trim() || undefined,
+      category: newPostCategory.trim() || undefined,
+      subtitle: newPostTitle ? "사용자 등록 글" : undefined
+    };
+
+    if (newPostTab === "official") {
+      setOfficialPosts((prev) => [newPost, ...prev]);
+    } else {
+      setSecretPosts((prev) => [newPost, ...prev]);
+    }
+
+    // Reset fields & close form
+    setNewPostCaption("");
+    setNewPostImgUrl("");
+    setNewPostTitle("");
+    setNewPostCategory("");
+    setShowAddPostForm(false);
+  };
+
 
   // Selected post modal
   const [selectedPost, setSelectedPost] = useState<SecretPost | null>(null);
@@ -169,7 +365,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         if (post.id === postId) {
           const newComment = {
             id: `new-c-${Date.now()}`,
-            username: "U",
+            username: "애착인형",
             text: newCommentText,
             time: "방금 전",
             isUser: true,
@@ -368,6 +564,145 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
           )}
         </AnimatePresence>
 
+        {/* Shuffler & Creator Dynamic Toolbar */}
+        <div id="insta-management-toolbar" className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-slate-100/80 border border-slate-200 p-3 rounded-xl relative z-10">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-black text-slate-700 select-none">📸 피드 편집 & 도구:</span>
+            <button
+              onClick={handleShuffleAllPhotos}
+              className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 shadow-xs px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors"
+              title="7장의 웹프 고성능 사진들을 피드 전체에 임의 배치합니다."
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-pink-600 border-none bg-transparent" />
+              <span>모든 피드 사진 섞기</span>
+            </button>
+          </div>
+
+          <button
+            onClick={() => setShowAddPostForm(!showAddPostForm)}
+            className="bg-slate-950 hover:bg-slate-900 text-white shadow-sm px-4 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-colors"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
+            <span>+ 새 게시물 올리기</span>
+          </button>
+        </div>
+
+        {/* Custom Post Addition Form Panel */}
+        <AnimatePresence>
+          {showAddPostForm && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="bg-white border-2 border-slate-950 rounded-xl p-4 mb-6 shadow-md overflow-hidden text-xs relative z-10"
+            >
+              <form onSubmit={handleAddNewPostSubmit} className="space-y-3">
+                <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1 pb-2 border-b">
+                  <ImageIcon className="w-4 h-4 text-emerald-500" />
+                  <span>새 피드 사진 올리기 업로더</span>
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-slate-500 font-bold mb-1">업로드 타겟 선택</label>
+                    <select
+                      value={newPostTab}
+                      onChange={(e) => setNewPostTab(e.target.value as any)}
+                      className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 font-semibold focus:outline-none"
+                    >
+                      <option value="official">💼 공식 피드 (seojun_official)</option>
+                      <option value="private">❤️ 비밀 비공개 피드 (seojun_2103)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-slate-500 font-bold mb-1">카테고리 / 태그 (선택)</label>
+                    <input
+                      type="text"
+                      className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
+                      placeholder="예: 현재 촬영, 데이트 기록, 커플룩 등"
+                      value={newPostCategory}
+                      onChange={(e) => setNewPostCategory(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">제목 / 기사 제목 (선택)</label>
+                  <input
+                    type="text"
+                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
+                    placeholder="공식 기사 제목이나 타이틀"
+                    value={newPostTitle}
+                    onChange={(e) => setNewPostTitle(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">사진 이미지 URL 주소 (Pasted Link or Thumbnail click)</label>
+                  <input
+                    type="text"
+                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold text-rose-600 font-mono text-[11px]"
+                    placeholder="https://i.postimg.cc/... / 직접 붙여넣거나 아래 추천을 선택하세요"
+                    value={newPostImgUrl}
+                    onChange={(e) => setNewPostImgUrl(e.target.value)}
+                    required
+                  />
+                  {/* Preset photo thumbnails selector inside adder */}
+                  <div className="flex gap-1.5 overflow-x-auto mt-2 py-1 scrollbar-none bg-slate-50 p-1.5 rounded border border-slate-100">
+                    <span className="text-[10px] text-gray-400 font-black flex items-center shrink-0 pr-1 select-none">추천 7종:</span>
+                    {[
+                      "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
+                      "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
+                      "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
+                      "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
+                      "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
+                      "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
+                      "https://i.postimg.cc/DyzkBMtG/IMG-4.webp"
+                    ].map((url, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setNewPostImgUrl(url)}
+                        className={`w-10 h-10 rounded border overflow-hidden shrink-0 hover:border-pink-500 hover:scale-105 transition-all ${newPostImgUrl === url ? "border-pink-600 ring-2 ring-pink-100" : "border-slate-200"}`}
+                      >
+                        <img src={url} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-500 font-bold mb-1">피드 텍스트 / 본문 (Caption)</label>
+                  <textarea
+                    rows={2}
+                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
+                    placeholder="서준이가 이 사진을 올리며 남길 멘트를 기입하세요..."
+                    value={newPostCaption}
+                    onChange={(e) => setNewPostCaption(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="flex gap-2 justify-end pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddPostForm(false)}
+                    className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-1.5 rounded-lg cursor-pointer"
+                  >
+                    작성 취소
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-pink-600 hover:bg-pink-700 text-white font-extrabold px-5 py-1.5 rounded-lg cursor-pointer shadow-sm"
+                  >
+                    피드 등록 적용
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         {activeTab === "official" ? (
           /* ========================================================
              1. OFFICIAL ACCOMPANY TAB (💼)
@@ -383,7 +718,12 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
               {/* Profile Image (Glow Ring for Brand Actor) */}
               <div className="relative p-1 rounded-full bg-gradient-to-tr from-amber-400 to-rose-500">
                 <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white bg-slate-900 overflow-hidden relative flex items-center justify-center">
-                  <User className="w-16 h-16 text-slate-300 translate-y-2" />
+                  <img 
+                    src={officialPosts[0]?.imageUrl || "https://i.postimg.cc/7YL8mWpT/IMG-2.webp"} 
+                    alt="Actor Profile" 
+                    referrerPolicy="no-referrer"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
@@ -402,7 +742,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                 </div>
 
                 <div className="flex justify-center sm:justify-start gap-4 text-sm font-medium text-gray-500">
-                  <span className="text-gray-800"><strong className="text-black">6</strong> 게시물</span>
+                  <span className="text-gray-800"><strong className="text-black">{officialPosts.length}</strong> 게시물</span>
                   <span><strong className="text-black text-gray-800">4.5M</strong> 팔로워</span>
                   <span><strong className="text-black text-gray-800">12</strong> 팔로잉</span>
                 </div>
@@ -425,92 +765,56 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Post 1 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-slate-900 relative flex flex-col justify-center items-center text-white p-4 overflow-hidden">
-                    <div className="absolute inset-0 bg-cover bg-center brightness-50 contrast-125 saturate-50 blur-[1px]" style={{ backgroundImage: "linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7))" }}></div>
-                    <div className="relative z-10 text-center space-y-2">
-                      <span className="text-[10px] bg-red-500 px-2 py-0.5 rounded font-black tracking-wider uppercase">현재 방영</span>
-                      <h4 className="font-extrabold text-sm leading-tight text-white mb-1">SBS 드라마 《연애의 온도차》</h4>
-                      <p className="text-[10px] text-slate-300">"차도윤 본부장역 강서준 배우 스틸컷 대공개"</p>
-                      <p className="text-[9px] text-amber-400 font-bold mt-2">매주 수목 밤 10시 본방사수!</p>
+                {officialPosts.map((post) => (
+                  <div
+                    key={post.id}
+                    onClick={() => setSelectedPost(post)}
+                    className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm cursor-pointer hover:shadow-md transition-all relative"
+                  >
+                    {/* Hover actions panel: photo edit */}
+                    <div className="absolute top-2 right-2 flex gap-1 z-20">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setEditingPostId(post.id);
+                          setEditImageUrlInput(post.imageUrl);
+                        }}
+                        className="bg-slate-900/85 hover:bg-slate-950 text-white rounded-full p-1.5 border border-white/20 shadow-sm opacity-0 group-hover:opacity-100 transition duration-150 cursor-pointer"
+                        title="사진 변경"
+                      >
+                        <Settings className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    <div className="aspect-square bg-slate-900 relative flex flex-col justify-center items-center text-white p-4 overflow-hidden">
+                      <img
+                        src={post.imageUrl}
+                        alt={post.title || ""}
+                        referrerPolicy="no-referrer"
+                        className="absolute inset-0 w-full h-full object-cover brightness-65 group-hover:scale-105 transition-transform duration-300"
+                      />
+                      
+                      {/* Dark gradient mapping overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 z-10"></div>
+
+                      <div className="relative z-10 text-center space-y-1.5 p-2">
+                        {post.category && (
+                          <span className="text-[9.5px] bg-[#ee2a7b] px-2.5 py-0.5 rounded-full font-black tracking-wider uppercase inline-block">
+                            {post.category}
+                          </span>
+                        )}
+                        <h4 className="font-extrabold text-xs sm:text-sm leading-tight text-white mb-0.5">{post.title}</h4>
+                        <p className="text-[10px] text-slate-200 font-bold">{post.subtitle}</p>
+                        {post.badge && <p className="text-[9px] text-[#03c75a] font-black tracking-tighter bg-white/95 px-2 py-0.5 rounded inline-block shadow-xs">{post.badge}</p>}
+                      </div>
+                    </div>
+
+                    <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
+                      <p className="font-bold text-gray-800">seojun_official</p>
+                      <p className="text-gray-650 font-semibold mt-1 line-clamp-2">{post.caption}</p>
                     </div>
                   </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">오늘 밤 도윤과 은하의 대망의 한강 다리 난투(?)... 아니 진심 키스신 예고!! 후끈한 온도의 차이 함께 느끼실 거죠?</p>
-                  </div>
-                </div>
-
-                {/* Post 2 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-slate-950 relative flex flex-col justify-center items-center text-white p-4">
-                    <Award className="w-12 h-12 text-amber-400 mb-2 drop-shadow" />
-                    <span className="text-[10px] bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded border border-amber-500/30 font-bold tracking-wider mb-2">남우주연상 수상</span>
-                    <h4 className="font-extrabold text-xs text-center leading-tight">제46회 청룡영화상 남우주연상</h4>
-                    <p className="text-[9px] text-slate-400 text-center mt-1">영화 《무경계》 (정태수 역)</p>
-                  </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">청룡의 영광을 안겨주신 천만 관객 여러분들과 정태수를 사랑해 주신 모든 분들께 머리 숙여 감사드립니다. 더 겸손하게 깊이 배우겠습니다.</p>
-                  </div>
-                </div>
-
-                {/* Post 3 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-slate-900 relative flex flex-col justify-center items-center text-white p-4">
-                    <div className="absolute inset-0 bg-cover bg-center brightness-40" style={{ backgroundImage: "linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.4))" }}></div>
-                    <div className="relative z-10 text-center">
-                      <span className="text-[10px] bg-emerald-600 px-2 py-0.5 rounded font-bold tracking-wider">천만 돌파</span>
-                      <h4 className="font-black text-lg tracking-widest text-[#d83535] mt-2 mb-0.5">무 명</h4>
-                      <p className="text-sm font-bold text-white tracking-widest">無境界</p>
-                      <p className="text-[8px] text-slate-400 mt-2">정태수 역 독전 스틸컷</p>
-                    </div>
-                  </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">느와르의 새로운 한 획 《무경계》가 마침내 꿈의 스코어 1,000만을 달성했습니다! 핏빛 연기를 극한으로 선보인 서준 배우 감사패 증정.</p>
-                  </div>
-                </div>
-
-                {/* Post 4 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-slate-900 relative flex flex-col justify-center items-center text-white p-4 text-center">
-                    <span className="text-[9px] text-[#0066cc] font-extrabold uppercase bg-[#f0f9ff] border border-[#d0e6ff] px-2 py-0.5 rounded">드라마 명작</span>
-                    <h4 className="font-extrabold text-sm text-[#cacaca] mt-3">tvN 사극 대하드라마 <br/>《붉은 달, 그림자》</h4>
-                    <p className="text-[10px] text-amber-500 font-semibold mt-1">"서브 영웅, 호위무사 무영"</p>
-                  </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">서글픈 서브남신의 정석, 무영의 마지막 희생 장면 비하인드 컷입니다. 아직도 수많은 팬들의 가슴을 에이게 하는 눈빛!</p>
-                  </div>
-                </div>
-
-                {/* Post 5 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-slate-900 relative flex flex-col justify-center items-center text-white p-4 text-center">
-                    <span className="text-[9px] text-gray-400 font-extrabold bg-slate-800 px-2 py-0.5 rounded">파파라치 뉴스컷</span>
-                    <h4 className="font-extrabold text-sm text-sky-400 mt-3">"서준 배우, 늘어난 네이비 니트 스캔들?!"</h4>
-                    <p className="text-[9px] text-slate-400 mt-1">소속사는 '우주의 애착 방울일 뿐'이라 재치 있는 부정</p>
-                  </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">강서준 배우의 최애템(네이비 니트)은 늘 완벽하게 리폼된 유니크 디자인으로 팬들의 조공 리스트 상위권에 머물러 있습니다. 😄</p>
-                  </div>
-                </div>
-
-                {/* Post 6 */}
-                <div className="bg-white border border-[#e6e6e6] rounded-lg overflow-hidden group shadow-sm">
-                  <div className="aspect-square bg-[#03c75a]/5 border border-[#03c75a]/20 relative flex flex-col justify-center items-center text-[#1e1e1e] p-4 text-center">
-                    <span className="text-[9px] text-[#03c75a] font-black bg-white border border-[#03c75a]/30 px-2 py-0.5 rounded">네이버 인물 독점 인터뷰</span>
-                    <h4 className="font-extrabold text-sm text-gray-800 mt-4 leading-relaxed">&ldquo;츄리닝에 캔맥 한 보따리 차고 한강 걷기가 이상형&rdquo;</h4>
-                    <p className="text-[9px] text-gray-500 mt-1">친서민적(?) 이상형에 여성팬들 우렁찬 환호 세례</p>
-                  </div>
-                  <div className="p-3 text-xs bg-gray-50 border-t border-gray-100">
-                    <p className="font-bold text-gray-800">seojun_official</p>
-                    <p className="text-gray-600 mt-1 line-clamp-2">배우가 직접 작성한 네이버 프로필 참여 보드입니다. 늘 친근하고 편안하며 소탈한 매력으로 다가가는 톱배우가 되겠습니다.</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </motion.div>
@@ -559,7 +863,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
 
                     {/* Highly intimate secret bio */}
                     <div className="text-xs text-gray-600 leading-relaxed font-semibold">
-                      <p className="text-[#262626] font-bold text-sm">내 우주의 구원자 @u 와의 기록</p>
+                      <p className="text-[#262626] font-bold text-sm">내 우주의 구원자 @애착인형 와의 기록</p>
                       <p className="mt-1">💕 6년째 꽁꽁 숨겨가며 연애 중, 3년째 2103호 동거 중.</p>
                       <p>🔒 밖에서는 철벽 치지만 네 소파 옆에서는 무한 무장해제 인간.</p>
                       <p className="text-pink-600 font-extrabold flex items-center gap-1 mt-1 justify-center sm:justify-start">
@@ -589,42 +893,72 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                       className="bg-white border border-pink-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-md transition-all relative group"
                     >
                       {/* Interactive Visual Element */}
-                      <div className="aspect-square bg-slate-900 relative flex flex-col items-center justify-center text-white p-3 text-center">
-                        {post.imageUrl === "socks" && (
-                          <div className="absolute inset-0 bg-gradient-to-tr from-[#ee2a7b]/10 to-[#6228d7]/10 flex flex-col justify-center items-center">
+                      <div className="aspect-square bg-slate-900 relative flex flex-col items-center justify-center text-white p-3 text-center overflow-hidden">
+                        {post.imageUrl && post.imageUrl.startsWith("http") ? (
+                          <img 
+                            src={post.imageUrl}
+                            alt="Secret Feed Card"
+                            referrerPolicy="no-referrer"
+                            className="absolute inset-0 w-full h-full object-cover brightness-75 group-hover:scale-105 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 bg-gradient-to-tr from-[#ee2a7b]/15 to-[#6228d7]/20 flex flex-col justify-center items-center">
+                            <span className="text-3xl filter drop-shadow">🔒</span>
+                            <span className="text-[10px] text-pink-300 mt-2 font-bold">비공개 소장 기록</span>
+                          </div>
+                        )}
+
+                        {/* Interactive overlay icon context info */}
+                        {post.id === "secret-1" && !post.imageUrl.startsWith("http") && (
+                          <div className="relative z-10 flex flex-col justify-center items-center">
                             <span className="text-4xl filter drop-shadow">🧦</span>
-                            <span className="text-[11px] font-bold text-pink-400 mt-2">U의 수면 양말 한 짝</span>
+                            <span className="text-[11px] font-bold text-pink-400 mt-2">애착인형의 수면 양말 한 짝</span>
                             <span className="text-[9px] text-gray-300 mt-1">소파 뒤 기밀 발견기</span>
                           </div>
                         )}
-                        {post.imageUrl === "crying" && (
-                          <div className="absolute inset-0 bg-gradient-to-tr from-[#ef4444]/20 to-black/80 flex flex-col justify-center items-center">
+                        {post.id === "secret-2" && !post.imageUrl.startsWith("http") && (
+                          <div className="relative z-10 flex flex-col justify-center items-center">
                             <span className="text-4xl filter drop-shadow">🌧️</span>
                             <span className="text-[11px] font-extrabold text-red-400 mt-2">새벽 3시 빌라 앞 오열</span>
                             <span className="text-[9px] text-gray-300 mt-1">메소드 연기의 슬픈 현실</span>
                           </div>
                         )}
-                        {post.imageUrl === "knit" && (
-                          <div className="absolute inset-0 bg-gradient-to-tr from-slate-200/20 to-slate-900/80 flex flex-col justify-center items-center">
+                        {post.id === "secret-3" && !post.imageUrl.startsWith("http") && (
+                          <div className="relative z-10 flex flex-col justify-center items-center">
                             <div className="text-4xl text-sky-400 filter drop-shadow">🧶</div>
                             <span className="text-[11px] font-bold text-sky-300 mt-2">해진 네이비 니트 고집</span>
                             <span className="text-[9px] text-gray-300 mt-1">무명 시절 첫 니트의 비밀</span>
                           </div>
                         )}
-                        {post.imageUrl === "hanriver" && (
-                          <div className="absolute inset-0 bg-gradient-to-tr from-yellow-100/10 to-indigo-950 flex flex-col justify-center items-center">
+                        {post.id === "secret-4" && !post.imageUrl.startsWith("http") && (
+                          <div className="relative z-10 flex flex-col justify-center items-center">
                             <span className="text-4xl filter drop-shadow">🍺</span>
                             <span className="text-[11px] font-bold text-yellow-300 mt-2">츄리닝 한강 캔맥주</span>
                             <span className="text-[9px] text-gray-300 mt-1">6년 전 무명 때 데이트 재현</span>
                           </div>
                         )}
 
+                        {/* Hover action to edit Secret image URL */}
+                        <div className="absolute top-2 right-2 flex gap-1 z-20">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditingPostId(post.id);
+                              setEditImageUrlInput(post.imageUrl);
+                            }}
+                            className="bg-slate-900/85 hover:bg-slate-950 text-white rounded-full p-1.5 border border-white/20 shadow-sm opacity-0 group-hover:opacity-100 transition duration-150 cursor-pointer"
+                            title="사진 변경"
+                          >
+                            <Settings className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+
                         {/* Over-hover micro interaction */}
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-all duration-350">
-                          <span className="flex items-center gap-1 font-bold text-xs">
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-all duration-350 z-10">
+                          <span className="flex items-center gap-1 font-bold text-xs text-white">
                             <Heart className="w-4 h-4 fill-pink-500 text-pink-500" /> {post.likes}
                           </span>
-                          <span className="flex items-center gap-1 font-bold text-xs">
+                          <span className="flex items-center gap-1 font-bold text-xs text-white">
                             <MessageCircle className="w-4 h-4 text-white" /> {post.commentsCount}
                           </span>
                         </div>
@@ -635,7 +969,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                         <p className="font-bold text-gray-800 flex items-center gap-1 text-[11px]">
                           <span>seojun_2103</span>
                         </p>
-                        <p className="text-gray-500 font-medium limit bg-transparent line-clamp-1 truncate mt-0.5">{post.caption}</p>
+                        <p className="text-gray-500 font-semibold limit bg-transparent line-clamp-1 truncate mt-0.5">{post.caption}</p>
                       </div>
                     </motion.div>
                   ))}

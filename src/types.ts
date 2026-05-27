@@ -26,6 +26,10 @@ export interface SecretPost {
       time: string;
     }>;
   }>;
+  title?: string;
+  category?: string;
+  subtitle?: string;
+  badge?: string;
 }
 
 export interface UserSettings {
