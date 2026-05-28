@@ -104,7 +104,7 @@ export default function App() {
       <footer className="bg-slate-950 text-slate-500 py-6 text-center border-t border-slate-900 text-xs">
         <div className="max-w-4xl mx-auto px-4 space-y-2">
           <p className="font-semibold text-slate-400">
-            🌳 나무위키 숨겨진 비밀 주석들을 모두 찾아본 후 비공개 인스타그램(❤️)에서 강서준에게 수수께끼를 던져보세요!
+            🌳 나무위키 숨겨진 비밀 주석들을 모두 찾아본 후 비공개 인스타그램(❤️)에서 강서준에게 DM을 보내보세요.
           </p>
           <p className="text-slate-600 font-medium">
             © 2026 HS Entertainment & Wiki Star. Powered by Gemini 3.5. All Rights Reserved.
