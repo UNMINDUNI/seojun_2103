@@ -231,7 +231,7 @@ export default function NaverProfile({ onInstagramClick }: NaverProfileProps) {
                           className="relative p-2.5 rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] text-white hover:shadow-md cursor-pointer flex items-center gap-2 font-bold text-xs"
                         >
                           <Instagram className="w-4 h-4" />
-                          <span>가상 인스타그램 이동</span>
+                          <span>인스타그램 이동</span>
                           
                           {/* Pulsing indicator ring to guide action */}
                           <span className="absolute -top-1 -right-1 flex h-3 w-3">
@@ -241,7 +241,7 @@ export default function NaverProfile({ onInstagramClick }: NaverProfileProps) {
                         </motion.button>
                         
                         <div className="hidden sm:flex text-xs text-gray-400 select-none items-center gap-1 ml-1.5 animate-pulse">
-                          <span>(이 아이콘을 누르면 인격 소통 시뮬레이터로 진입합니다)</span>
+                          <span>(이 아이콘을 누르면 인스타그램으로 이동합니다.)</span>
                         </div>
                       </div>
                     </div>
