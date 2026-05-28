@@ -72,7 +72,7 @@ export default function App() {
               }`}
             >
               <Instagram className="w-3.5 h-3.5" />
-              <span>가상 인스타그램</span>
+              <span>인스타그램</span>
               
               {/* Pulsing secret heart symbol to tease intimacy */}
               <span className="absolute -top-1 -right-1 block h-2.5 w-2.5 rounded-full bg-pink-500 ring-2 ring-slate-900 animate-pulse"></span>
