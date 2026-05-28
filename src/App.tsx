@@ -27,7 +27,7 @@ export default function App() {
           {/* Main Logo Header */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-400 to-pink-500 bg-clip-text text-transparent">
-              강서준 연인 비밀연애 시뮬레이터
+              배우 강서준과의 비밀연애
             </span>
             <span className="text-[10px] bg-slate-800 text-slate-300 font-bold px-1.5 py-0.5 rounded border border-slate-700">
               SECRET v3.5
