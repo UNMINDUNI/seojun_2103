@@ -27,7 +27,7 @@ export default function App() {
           {/* Main Logo Header */}
           <div className="flex items-center gap-2">
             <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-emerald-400 via-teal-400 to-pink-500 bg-clip-text text-transparent">
-              강서준 연인 비밀연애 시뮬레이터
+              배우 강서준과의 비밀연애
             </span>
             <span className="text-[10px] bg-slate-800 text-slate-300 font-bold px-1.5 py-0.5 rounded border border-slate-700">
               SECRET v3.5
@@ -72,7 +72,7 @@ export default function App() {
               }`}
             >
               <Instagram className="w-3.5 h-3.5" />
-              <span>가상 인스타그램</span>
+              <span>인스타그램</span>
               
               {/* Pulsing secret heart symbol to tease intimacy */}
               <span className="absolute -top-1 -right-1 block h-2.5 w-2.5 rounded-full bg-pink-500 ring-2 ring-slate-900 animate-pulse"></span>
@@ -104,7 +104,7 @@ export default function App() {
       <footer className="bg-slate-950 text-slate-500 py-6 text-center border-t border-slate-900 text-xs">
         <div className="max-w-4xl mx-auto px-4 space-y-2">
           <p className="font-semibold text-slate-400">
-            🌳 나무위키 숨겨진 비밀 주석들을 모두 찾아본 후 비공개 인스타그램(❤️)에서 강서준에게 수수께끼를 던져보세요!
+            🌳 나무위키 숨겨진 비밀 주석들을 모두 찾아보세요.❤️
           </p>
           <p className="text-slate-600 font-medium">
             © 2026 HS Entertainment & Wiki Star. Powered by Gemini 3.5. All Rights Reserved.
