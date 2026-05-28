@@ -3,20 +3,11 @@ import { Instagram, Search, Award, Calendar, User, Heart, Briefcase, ExternalLin
 import { motion } from "motion/react";
 
 const KANG_SE_JUN_PHOTOS = [
-  "https://i.postimg.cc/mZw58C2B/full-body-1-5-ligne-claire-male-focus-looking-at-viewer-parted-lips-smile-1-s-1376943154.webp",
-  "https://i.postimg.cc/HkfZVt3Z/full-body-2-male-focus-face-from-side-looking-at-viewer-Still-chair-on-chair-s-3933004525.webp",
-  "https://i.postimg.cc/B63mCQr1/full-body-solo-2-male-focus-on-table-0-5-hair-slicked-back-leaning-b-s-1251848019.webp",
-  "https://i.postimg.cc/qRr1GMPz/full-body-solo-2-male-focus-on-table-hair-slicked-back-leaning-back-pho-s-3632057797.webp",
-  "https://i.postimg.cc/LXSxV6cp/full-body-solo-2-male-focus-on-table-hair-slicked-back-leaning-back-photo-s-s-3847922501-(1).webp",
-  "https://i.postimg.cc/cHWFc4pN/full-body-solo-2-male-focus-on-table-leaning-back-photo-shoot-hair-over-shoul-s-2747488000.webp",
-  "https://i.postimg.cc/XJWsg7Tm/full-body-solo-2-male-focus-on-table-photo-shoot-hair-over-shoulder-smile-shi-s-706670893.webp",
-  "https://i.postimg.cc/LsLyfZ0x/full-body-solo-2-male-focus-on-table-sunglasses-grin-shirt-black-pants-shoes-s-4166426816.webp",
-  "https://i.postimg.cc/gcDTN8kG/full-body-solo-male-face-focus-from-viewer-looking-at-down-tears-crying-2-stre-s-790381999.webp",
-  "https://i.postimg.cc/CMNQmkLg/full-body-solo-male-focus-from-above-looking-at-viewer-parted-lips-smile-white-s-3202144065.webp",
-  "https://i.postimg.cc/1RHjJw5m/full-body-solo-male-focus-looking-at-viewer-parted-lips-smile-chest-of-drawers-c-s-577233136.webp",
-  "https://i.postimg.cc/zfKdWRPk/solo-2-male-focus-face-eyes-grin-black-mask-leather-jacket-crew-neck-shirt-f-s-167446978.webp",
-  "https://i.postimg.cc/HLXS57PB/solo-2-male-focus-face-eyes-white-baseball-cap-black-mask-leather-jacket-cre-s-2521689337.webp",
-  "https://i.postimg.cc/k5Kj8tpm/full-body-solo-2-male-focus-on-table-photo-shoot-grin-shirt-black-pants-shoes-s-611159462.webp"
+  "https://i.postimg.cc/HkfZVt3Z/2.webp",
+  "https://i.postimg.cc/Dwj6t3Sz/10.webp",
+  "https://i.postimg.cc/mZw58C2B/1.webp",
+  "https://i.postimg.cc/B63mCQr1/3.webp",
+  "https://i.postimg.cc/KjDrfd6s/14.webp"
 ];
 
 interface NaverProfileProps {
