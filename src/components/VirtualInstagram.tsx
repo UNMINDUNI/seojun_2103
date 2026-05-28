@@ -620,7 +620,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                      {/* Highly intimate secret bio */}
                     <div className="text-xs text-gray-600 leading-relaxed font-semibold">
                       <p className="text-[#262626] font-bold text-sm">내 우주의 구원자 @{"{user}"} 와의 기록</p>
-                      <p className="mt-1">💕 6년째 꽁꽁 숨겨가며 연애 중, 3년째 2103호 동거 중.</p>
+                      <p className="mt-1">💕 6년째 꽁꽁 숨겨가며 연애 중, 3년째 동거 중.</p>
                       <p>🔒 밖에서는 철벽 치지만 네 소파 옆에서는 무한 무장해제 인간.</p>
                     </div>
                   </div>
@@ -745,15 +745,15 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                   </div>
                   <div>
                     <h3 className="text-xs font-black text-gray-900 flex items-center gap-1">
-                      강서준 (2103호)
+                      강서준
                       <span className="text-[9px] text-[#ee2a7b] bg-pink-100 px-1.5 py-0.2 rounded font-bold">실시간 활성화</span>
                     </h3>
-                    <p className="text-[10px] text-emerald-600 font-bold">당신을 엄청 짝사랑하고 의존하는 중 💖</p>
+                    <p className="text-[10px] text-emerald-600 font-bold">당신을 엄청 사랑하고 의존하는 중 💖</p>
                   </div>
                 </div>
 
                 <div className="text-[10px] text-gray-400 font-bold flex items-center gap-1 bg-white border border-pink-100 px-2 py-1 rounded-full">
-                  <span>동거 3년차</span>
+                  <span>연애 6년차, 동거 3년차</span>
                 </div>
               </div>
 
@@ -980,7 +980,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                     type="text"
                     value={newCommentText}
                     onChange={(e) => setNewCommentText(e.target.value)}
-                    placeholder="비공개 댓글 달기... (서준이가 대답해줍니다)"
+                    placeholder="댓글 달기"
                     className="flex-1 bg-white border border-slate-200 rounded-full px-3 py-1.5 text-xs focus:outline-none focus:border-pink-300 font-semibold"
                     onKeyDown={(e) => e.key === "Enter" && handlePostComment(selectedPost.id)}
                   />
