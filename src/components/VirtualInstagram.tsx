@@ -15,7 +15,7 @@ interface VirtualInstagramProps {
 export default function VirtualInstagram({ onBackToPortal, initialTab = "official" }: VirtualInstagramProps) {
   const [activeTab, setActiveTab] = useState<InstagramTab>(initialTab);
   const [userSettings, setUserSettings] = useState<UserSettings>({
-    nickname: "자기야",
+    nickname: "{user}",
     gender: "female",
   });
   const [showSettings, setShowSettings] = useState<boolean>(false);
@@ -139,7 +139,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
   // Secret Posts Database (with real WebP photos and updated names)
   const [secretPosts, setSecretPosts] = useState<SecretPost[]>(() => {
     const saved = localStorage.getItem("insta_secret_posts");
-    if (saved) return JSON.parse(saved);
+    if (saved && !saved.includes("애착인형")) return JSON.parse(saved);
     return [
       {
         id: "secret-1",
@@ -149,7 +149,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         commentsCount: 2,
         date: "2026.05.15",
         comments: [
-          { id: "c1-1", username: "애착인형", text: "어젯밤 소파에서 발 시리다고 징징대더니 기어코 찾아다 찍었네ㅋㅋㅋ 치워놓으랬지!", time: "10분 전", isUser: true },
+          { id: "c1-1", username: "{user}", text: "어젯밤 소파에서 발 시리다고 징징대더니 기어코 찾아다 찍었네ㅋㅋㅋ 치워놓으랬지!", time: "10분 전", isUser: true },
           { id: "c1-2", username: "seojun_2103", text: "절대 못 치워. 이거 소파 붙박이 인테리어야. 네 향기가 남아 있어야 힘이 난단 말야... 빨지도 마!", time: "8분 전" }
         ]
       },
@@ -161,9 +161,9 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         commentsCount: 3,
         date: "2025.06.28",
         comments: [
-          { id: "c2-1", username: "애착인형", text: "이 흑역사를 또 소환하네.. 동네 시끄럽게 소리 소리 지르고 현관문이 구멍 날 정도로 쳐대서 경찰 신고당할까 봐 열어준 줄 알아라 바보야.", time: "1일 전", isUser: true },
+          { id: "c2-1", username: "{user}", text: "이 흑역사를 또 소환하네.. 동네 시끄럽게 소리 소리 지르고 현관문이 구멍 날 정도로 쳐대서 경찰 신고당할까 봐 열어준 줄 알아라 바보야.", time: "1일 전", isUser: true },
           { id: "c2-2", username: "seojun_2103", text: "그럼 어떡해, 네가 나 차단하고 번호 바꾸고 짐 다 싸고 나갔잖아. 톱배우고 청룡이고 나발이고 너 없으면 나 껍데기야 껍데기.", time: "18시간 전" },
-          { id: "c2-3", username: "애착인형", text: "그래 알아, 그날부터 우리 튼튼한 자물쇠 새로 맞췄다 아주.", time: "15시간 전", isUser: true }
+          { id: "c2-3", username: "{user}", text: "그래 알아, 그날부터 우리 튼튼한 자물쇠 새로 맞췄다 아주.", time: "15시간 전", isUser: true }
         ]
       },
       {
@@ -174,18 +174,18 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         commentsCount: 1,
         date: "2026.04.12",
         comments: [
-          { id: "c3-1", username: "애착인형", text: "아니.. 보풀 제거기라도 좀 돌리게 줘보라고 진짜ㅋㅋㅋ 리딩 목격 기사에 니트 헤진 거 팬들이 보고 HS엔터 가난하냐고 난리났단 말야ㅋㅋㅋ", time: "3일 전", isUser: true }
+          { id: "c3-1", username: "{user}", text: "아니.. 보풀 제거기라도 좀 돌리게 줘보라고 진짜ㅋㅋㅋ 리딩 목격 기사에 니트 헤진 거 팬들이 보고 HS엔터 가난하냐고 난리났단 말야ㅋㅋㅋ", time: "3일 전", isUser: true }
         ]
       },
       {
         id: "secret-4",
         imageUrl: "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
-        caption: "너랑 한강 돗자리에 쭈그려 누워 캔맥주에 편의점 떡볶이 먹던 그 가을 바람. 내 네이버 공식 프로필 이상형이 왜 '츄리닝에 캔맥주 하나 들고 한강 걷기'로 고정되었는지 세상 사람들은 절대 모른다. 눈앞의 한강 뷰 펜트하우스를 사서 거실 열쇠고리를 바치기까지 먼 길도 너랑 손잡고 캔맥주 홀짝이던 발걸음이 있었네. 사랑한다, 세상에서 가장 따뜻하고 편안한 내 구세주.",
+        caption: "너랑 한강 돗자리에 쭈그려 누워 캔맥주에 편의점 떡볶이 먹던 그 가을 바람. 내 네이버 공식 프로필 이상형이 왜 '츄리닝에 캔맥주 하나 들고 한강 걷기'로 고정되었는지 세상 사람들은 절대 모른다. 눈앞의 한강 뷰 펜트하우스를 사서 거실 열쇠고리를 바치기까지 먼 길도 너랑 손잡고 캔맥주 홀짝이던 발걸음이 있었네. 사랑한다, 세상에서 가장 따뜻하고 편안한 내 구색주.",
         likes: 56,
         commentsCount: 1,
         date: "2026.02.04",
         comments: [
-          { id: "c4-1", username: "애착인형", text: "나도 가끔 그 포장마차랑 돗자리가 눈물 나게 그립더라. 지금 한강뷰 최고급 소파 위에서 뒹굴거리는 것도 눈부시게 좋은데, 우린 여전히 그대로네.", time: "4주 전", isUser: true }
+          { id: "c4-1", username: "{user}", text: "나도 가끔 그 포장마차랑 돗자리가 눈물 나게 그립더라. 지금 한강뷰 최고급 소파 위에서 뒹굴거리는 것도 눈부시게 좋은데, 우린 여전히 그대로네.", time: "4주 전", isUser: true }
         ]
       }
     ];
@@ -365,7 +365,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         if (post.id === postId) {
           const newComment = {
             id: `new-c-${Date.now()}`,
-            username: "애착인형",
+            username: "{user}",
             text: newCommentText,
             time: "방금 전",
             isUser: true,
@@ -488,15 +488,6 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
           </div>
 
           <div className="flex items-center gap-3">
-            {activeTab === "private" && (
-              <button
-                onClick={() => setShowSettings(!showSettings)}
-                className={`p-2 rounded-full hover:bg-gray-100 transition-colors cursor-pointer ${showSettings ? "text-pink-600 bg-pink-50" : "text-gray-600"}`}
-                title="비밀 관계 호칭 및 성별 관리"
-              >
-                <Settings className="w-5 h-5 animate-spin-slow" />
-              </button>
-            )}
             <div className="h-8 w-8 rounded-full bg-slate-200 border border-slate-300 flex items-center justify-center font-bold text-xs">
               U
             </div>
@@ -507,201 +498,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
       {/* Body content based on active tab */}
       <div className="max-w-4xl mx-auto py-6 px-4">
         
-        {/* Dynamic Personalized settings overlay banner */}
-        <AnimatePresence>
-          {showSettings && activeTab === "private" && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="bg-white border-2 border-pink-100 rounded-xl p-4 mb-6 shadow-sm overflow-hidden"
-            >
-              <div className="flex items-center gap-2 text-pink-600 font-bold text-sm mb-3">
-                <Settings className="w-4 h-4" />
-                <span>동거 관계 시뮬레이션 설정 (서준이의 말투가 호칭에 따라 변화합니다)</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 mb-1">동거인 애칭 / 서준이가 부를 호칭</label>
-                  <input
-                    type="text"
-                    value={userSettings.nickname}
-                    onChange={(e) => setUserSettings({ ...userSettings, nickname: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded p-2 text-sm focus:outline-none focus:border-pink-300"
-                    placeholder="자기야, 누나, ㅇㅇ이 등"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-500 mb-1">유저의 성별 선택</label>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setUserSettings({ ...userSettings, gender: "female" })}
-                      className={`flex-1 py-1.5 rounded border text-xs font-bold transition-all ${
-                        userSettings.gender === "female"
-                          ? "bg-pink-100 border-pink-300 text-pink-700"
-                          : "bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100"
-                      }`}
-                    >
-                      여성 (호칭: 너, 자기)
-                    </button>
-                    <button
-                      onClick={() => setUserSettings({ ...userSettings, gender: "male" })}
-                      className={`flex-1 py-1.5 rounded border text-xs font-bold transition-all ${
-                        userSettings.gender === "male"
-                          ? "bg-indigo-100 border-indigo-300 text-indigo-700"
-                          : "bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100"
-                      }`}
-                    >
-                      남성 (호칭: 형, 너, 자기)
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <p className="text-[11px] text-slate-400 mt-2">
-                * 설정 적용 후 아래 채팅 전송 시 실시간으로 서준이의 성격에 심도 있게 반영됩니다.
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        {/* Shuffler & Creator Dynamic Toolbar */}
-        <div id="insta-management-toolbar" className="flex flex-wrap items-center justify-between gap-3 mb-6 bg-slate-100/80 border border-slate-200 p-3 rounded-xl relative z-10">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-black text-slate-700 select-none">📸 피드 편집 & 도구:</span>
-            <button
-              onClick={handleShuffleAllPhotos}
-              className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 shadow-xs px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors"
-              title="7장의 웹프 고성능 사진들을 피드 전체에 임의 배치합니다."
-            >
-              <RefreshCw className="w-3.5 h-3.5 text-pink-600 border-none bg-transparent" />
-              <span>모든 피드 사진 섞기</span>
-            </button>
-          </div>
-
-          <button
-            onClick={() => setShowAddPostForm(!showAddPostForm)}
-            className="bg-slate-950 hover:bg-slate-900 text-white shadow-sm px-4 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-colors"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-            <span>+ 새 게시물 올리기</span>
-          </button>
-        </div>
-
-        {/* Custom Post Addition Form Panel */}
-        <AnimatePresence>
-          {showAddPostForm && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="bg-white border-2 border-slate-950 rounded-xl p-4 mb-6 shadow-md overflow-hidden text-xs relative z-10"
-            >
-              <form onSubmit={handleAddNewPostSubmit} className="space-y-3">
-                <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1 pb-2 border-b">
-                  <ImageIcon className="w-4 h-4 text-emerald-500" />
-                  <span>새 피드 사진 올리기 업로더</span>
-                </h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-slate-500 font-bold mb-1">업로드 타겟 선택</label>
-                    <select
-                      value={newPostTab}
-                      onChange={(e) => setNewPostTab(e.target.value as any)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 font-semibold focus:outline-none"
-                    >
-                      <option value="official">💼 공식 피드 (seojun_official)</option>
-                      <option value="private">❤️ 비밀 비공개 피드 (seojun_2103)</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-slate-500 font-bold mb-1">카테고리 / 태그 (선택)</label>
-                    <input
-                      type="text"
-                      className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
-                      placeholder="예: 현재 촬영, 데이트 기록, 커플룩 등"
-                      value={newPostCategory}
-                      onChange={(e) => setNewPostCategory(e.target.value)}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">제목 / 기사 제목 (선택)</label>
-                  <input
-                    type="text"
-                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
-                    placeholder="공식 기사 제목이나 타이틀"
-                    value={newPostTitle}
-                    onChange={(e) => setNewPostTitle(e.target.value)}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">사진 이미지 URL 주소 (Pasted Link or Thumbnail click)</label>
-                  <input
-                    type="text"
-                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold text-rose-600 font-mono text-[11px]"
-                    placeholder="https://i.postimg.cc/... / 직접 붙여넣거나 아래 추천을 선택하세요"
-                    value={newPostImgUrl}
-                    onChange={(e) => setNewPostImgUrl(e.target.value)}
-                    required
-                  />
-                  {/* Preset photo thumbnails selector inside adder */}
-                  <div className="flex gap-1.5 overflow-x-auto mt-2 py-1 scrollbar-none bg-slate-50 p-1.5 rounded border border-slate-100">
-                    <span className="text-[10px] text-gray-400 font-black flex items-center shrink-0 pr-1 select-none">추천 7종:</span>
-                    {[
-                      "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
-                      "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
-                      "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
-                      "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
-                      "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
-                      "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
-                      "https://i.postimg.cc/DyzkBMtG/IMG-4.webp"
-                    ].map((url, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => setNewPostImgUrl(url)}
-                        className={`w-10 h-10 rounded border overflow-hidden shrink-0 hover:border-pink-500 hover:scale-105 transition-all ${newPostImgUrl === url ? "border-pink-600 ring-2 ring-pink-100" : "border-slate-200"}`}
-                      >
-                        <img src={url} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-slate-500 font-bold mb-1">피드 텍스트 / 본문 (Caption)</label>
-                  <textarea
-                    rows={2}
-                    className="w-full bg-slate-50 border border-slate-200 rounded p-1.5 focus:outline-none font-semibold"
-                    placeholder="서준이가 이 사진을 올리며 남길 멘트를 기입하세요..."
-                    value={newPostCaption}
-                    onChange={(e) => setNewPostCaption(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div className="flex gap-2 justify-end pt-2">
-                  <button
-                    type="button"
-                    onClick={() => setShowAddPostForm(false)}
-                    className="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-4 py-1.5 rounded-lg cursor-pointer"
-                  >
-                    작성 취소
-                  </button>
-                  <button
-                    type="submit"
-                    className="bg-pink-600 hover:bg-pink-700 text-white font-extrabold px-5 py-1.5 rounded-lg cursor-pointer shadow-sm"
-                  >
-                    피드 등록 적용
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {activeTab === "official" ? (
           /* ========================================================
@@ -861,14 +658,11 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                       <span>팔로잉 <strong className="text-pink-600">1</strong></span>
                     </div>
 
-                    {/* Highly intimate secret bio */}
+                     {/* Highly intimate secret bio */}
                     <div className="text-xs text-gray-600 leading-relaxed font-semibold">
-                      <p className="text-[#262626] font-bold text-sm">내 우주의 구원자 @애착인형 와의 기록</p>
+                      <p className="text-[#262626] font-bold text-sm">내 우주의 구원자 @{"{user}"} 와의 기록</p>
                       <p className="mt-1">💕 6년째 꽁꽁 숨겨가며 연애 중, 3년째 2103호 동거 중.</p>
                       <p>🔒 밖에서는 철벽 치지만 네 소파 옆에서는 무한 무장해제 인간.</p>
-                      <p className="text-pink-600 font-extrabold flex items-center gap-1 mt-1 justify-center sm:justify-start">
-                        <Sparkles className="w-3.5 h-3.5" /> 호칭 설정 적용: &quot;{userSettings.nickname}&quot;님 
-                      </p>
                     </div>
                   </div>
                 </div>
@@ -912,7 +706,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                         {post.id === "secret-1" && !post.imageUrl.startsWith("http") && (
                           <div className="relative z-10 flex flex-col justify-center items-center">
                             <span className="text-4xl filter drop-shadow">🧦</span>
-                            <span className="text-[11px] font-bold text-pink-400 mt-2">애착인형의 수면 양말 한 짝</span>
+                            <span className="text-[11px] font-bold text-pink-400 mt-2">{"{user}"}의 수면 양말 한 짝</span>
                             <span className="text-[9px] text-gray-300 mt-1">소파 뒤 기밀 발견기</span>
                           </div>
                         )}
@@ -1137,19 +931,35 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
               exit={{ scale: 0.95, opacity: 0 }}
               className="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl border border-pink-100 grid grid-cols-1 md:grid-cols-2 max-h-[90vh] sm:max-h-[80vh]"
             >
-              {/* Left Side: Mock Image Placeholder details based on content */}
-              <div className="bg-slate-950 flex flex-col justify-center items-center text-white p-6 relative aspect-square md:aspect-auto">
-                <div className="absolute top-3 left-3 bg-pink-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full select-none">
-                  🔒 SECRET DIARY
+              {/* Left Side: Photo or Mock Image Placeholder details based on content */}
+              <div className="bg-slate-950 flex flex-col justify-center items-center text-white p-6 relative aspect-square md:aspect-auto overflow-hidden">
+                {selectedPost.imageUrl && selectedPost.imageUrl.startsWith("http") ? (
+                  <img 
+                    src={selectedPost.imageUrl} 
+                    alt="Selected Feed Post" 
+                    referrerPolicy="no-referrer"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#ee2a7b]/15 to-[#6228d7]/20"></div>
+                    {selectedPost.imageUrl === "socks" && <span className="text-7xl mb-2 relative z-10">🧦</span>}
+                    {selectedPost.imageUrl === "crying" && <span className="text-7xl mb-2 relative z-10">🌧️</span>}
+                    {selectedPost.imageUrl === "knit" && <span className="text-7xl mb-2 relative z-10">🧶</span>}
+                    {selectedPost.imageUrl === "hanriver" && <span className="text-7xl mb-2 relative z-10">🍺</span>}
+                  </>
+                )}
+
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-black/20 pointer-events-none z-10"></div>
+
+                <div className="absolute top-3 left-3 bg-pink-600 text-white font-extrabold text-[9px] px-2 py-0.5 rounded-full select-none z-10">
+                  {selectedPost.id.startsWith("off") ? "💼 OFFICIAL POST" : "🔒 SECRET DIARY"}
                 </div>
 
-                {selectedPost.imageUrl === "socks" && <span className="text-7xl mb-2">🧦</span>}
-                {selectedPost.imageUrl === "crying" && <span className="text-7xl mb-2">🌧️</span>}
-                {selectedPost.imageUrl === "knit" && <span className="text-7xl mb-2">🧶</span>}
-                {selectedPost.imageUrl === "hanriver" && <span className="text-7xl mb-2">🍺</span>}
-
-                <p className="text-xs font-bold text-gray-400 mt-2 font-mono">seojun_2103</p>
-                <p className="text-[10px] text-pink-400 font-bold">{selectedPost.date} 기록물</p>
+                <p className="text-xs font-bold text-gray-300 mt-2 font-mono relative z-10">
+                  {selectedPost.id.startsWith("off") ? "seojun_official" : "seojun_2103"}
+                </p>
+                <p className="text-[10px] text-pink-400 font-bold relative z-10">{selectedPost.date} 기록물</p>
               </div>
 
               {/* Right Side: Caption & Detailed Interactive Comments */}
@@ -1191,7 +1001,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[9px] shrink-0 select-none ${
                           comment.isUser ? "bg-pink-100 text-pink-700 font-black" : "bg-slate-800 text-white"
                         }`}>
-                          {comment.username === "U" ? "U" : "🦊"}
+                          {comment.isUser ? "U" : "🦊"}
                         </div>
                         <div className="flex-1">
                           <p className="leading-tight">
