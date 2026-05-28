@@ -724,7 +724,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                       강서준 (2103호)
                       <span className="text-[9px] text-[#ee2a7b] bg-pink-100 px-1.5 py-0.2 rounded font-bold">실시간 활성화</span>
                     </h3>
-                    <p className="text-[10px] text-emerald-600 font-bold">당신을 엄청 짝사랑하고 의존하는 중 💖</p>
+                    <p className="text-[10px] text-emerald-600 font-bold">당신을 엄청 사랑하고 의존하는 중 💖</p>
                   </div>
                 </div>
 
