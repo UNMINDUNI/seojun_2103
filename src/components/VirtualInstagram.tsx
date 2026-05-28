@@ -499,7 +499,16 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                   <p className="font-bold text-gray-900">강서준 Actor Kang Seo Jun</p>
                   <p className="mt-1">💼 HS Entertainment에서 공식 관리하는 강서준 배우 채널입니다.</p>
                   <p>🎬 SBS 《연애의 온도차》 차도윤 역 열연 방영 중!</p>
-                  <p className="text-[#00376b] hover:underline cursor-pointer mt-0.5 font-semibold">🔗 hsent.com/kangseojun</p>
+                  <p className="mt-0.5">
+                  <a 
+                    href="https://share.crack.wrtn.ai/j3lrj4" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-[#00376b] hover:underline cursor-pointer font-semibold"
+                  >
+                    🔗 hsent.com/kangseojun
+                  </a>
+                </p>
                 </div>
               </div>
             </div>
