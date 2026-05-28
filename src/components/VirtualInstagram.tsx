@@ -613,7 +613,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
 
                     <div className="flex justify-center sm:justify-start gap-3 my-2 text-xs font-semibold text-gray-500">
                       <span>게시물 <strong className="text-pink-600">4</strong></span>
-                      <span>팔로워 <strong className="text-pink-600">1 (자신)</strong></span>
+                      <span>팔로워 <strong className="text-pink-600">1</strong></span>
                       <span>팔로잉 <strong className="text-pink-600">1</strong></span>
                     </div>
 
@@ -860,7 +860,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder={`${userSettings.nickname} 이름으로 서준이와 투닥거리기...`}
+                  placeholder={`${userSettings.nickname} 서준이와 투닥거리기...`}
                   className="flex-1 bg-slate-50 hover:bg-slate-100/70 border border-slate-200 focus:border-pink-300 rounded-full px-4 py-2 text-xs font-semibold focus:outline-none transition-all"
                 />
                 <button
@@ -960,7 +960,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
                         <div className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-[9px] shrink-0 select-none ${
                           comment.isUser ? "bg-pink-100 text-pink-700 font-black" : "bg-slate-800 text-white"
                         }`}>
-                          {comment.isUser ? "U" : "🦊"}
+                          {comment.isUser ? "User" : "🦊"}
                         </div>
                         <div className="flex-1">
                           <p className="leading-tight">
