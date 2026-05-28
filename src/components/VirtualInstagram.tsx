@@ -37,19 +37,9 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
   const [editImageUrlInput, setEditImageUrlInput] = useState<string>("");
   
-  // State for creating a new post
-  const [showAddPostForm, setShowAddPostForm] = useState<boolean>(false);
-  const [newPostTab, setNewPostTab] = useState<"official" | "private">("official");
-  const [newPostCaption, setNewPostCaption] = useState<string>("");
-  const [newPostImgUrl, setNewPostImgUrl] = useState<string>("");
-  const [newPostTitle, setNewPostTitle] = useState<string>("");
-  const [newPostCategory, setNewPostCategory] = useState<string>("");
-
   // Official dynamic feed entries with real WebP photos
   const [officialPosts, setOfficialPosts] = useState<SecretPost[]>(() => {
-    const saved = localStorage.getItem("insta_official_posts");
-    if (saved) return JSON.parse(saved);
-    return [
+    const defaultOfficial = [
       {
         id: "off-1",
         category: "현재 방영",
@@ -134,13 +124,30 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         comments: []
       }
     ];
+
+    const saved = localStorage.getItem("insta_official_posts");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return defaultOfficial.map((p) => {
+            const match = parsed.find((x: any) => x.id === p.id);
+            if (match && match.imageUrl) {
+              return { ...p, imageUrl: match.imageUrl };
+            }
+            return p;
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return defaultOfficial;
   });
 
   // Secret Posts Database (with real WebP photos and updated names)
   const [secretPosts, setSecretPosts] = useState<SecretPost[]>(() => {
-    const saved = localStorage.getItem("insta_secret_posts");
-    if (saved && !saved.includes("애착인형")) return JSON.parse(saved);
-    return [
+    const defaultSecrets = [
       {
         id: "secret-1",
         imageUrl: "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
@@ -189,6 +196,25 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
         ]
       }
     ];
+
+    const saved = localStorage.getItem("insta_secret_posts");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return defaultSecrets.map((p) => {
+            const match = parsed.find((x: any) => x.id === p.id);
+            if (match && match.imageUrl) {
+              return { ...p, imageUrl: match.imageUrl };
+            }
+            return p;
+          });
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return defaultSecrets;
   });
 
   // Save states to localStorage for persistence
@@ -199,33 +225,6 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
   useEffect(() => {
     localStorage.setItem("insta_official_posts", JSON.stringify(officialPosts));
   }, [officialPosts]);
-
-  // Handle image shuffling randomly from the 7 WebP array
-  const handleShuffleAllPhotos = () => {
-    const urls = [
-      "https://i.postimg.cc/LXgy2mKq/IMG-1.webp",
-      "https://i.postimg.cc/9MwxCc5X/IMG-2.webp",
-      "https://i.postimg.cc/qR6m4pVN/IMG-3.webp",
-      "https://i.postimg.cc/MKG2dFhM/IMG-1.webp",
-      "https://i.postimg.cc/7YL8mWpT/IMG-2.webp",
-      "https://i.postimg.cc/SNKFDvwM/IMG-3.webp",
-      "https://i.postimg.cc/DyzkBMtG/IMG-4.webp"
-    ];
-
-    setOfficialPosts((prev) =>
-      prev.map((post) => {
-        const rand = urls[Math.floor(Math.random() * urls.length)];
-        return { ...post, imageUrl: rand };
-      })
-    );
-
-    setSecretPosts((prev) =>
-      prev.map((post) => {
-        const rand = urls[Math.floor(Math.random() * urls.length)];
-        return { ...post, imageUrl: rand };
-      })
-    );
-  };
 
   // Helper inside VirtualInstagram to apply photo edits
   const handleApplyPhotoEdit = (postId: string, newUrl: string) => {
@@ -245,38 +244,6 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
 
     setEditingPostId(null);
     setEditImageUrlInput("");
-  };
-
-  // Helper to create a brand new custom post with caption and photo URL
-  const handleAddNewPostSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newPostCaption.trim() || !newPostImgUrl.trim()) return;
-
-    const newPost: SecretPost = {
-      id: `custom-post-${Date.now()}`,
-      imageUrl: newPostImgUrl.trim(),
-      caption: newPostCaption.trim(),
-      likes: Math.floor(Math.random() * 500) + 12,
-      commentsCount: 0,
-      date: new Date().toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" }).replace(/ /g, ""),
-      comments: [],
-      title: newPostTitle.trim() || undefined,
-      category: newPostCategory.trim() || undefined,
-      subtitle: newPostTitle ? "사용자 등록 글" : undefined
-    };
-
-    if (newPostTab === "official") {
-      setOfficialPosts((prev) => [newPost, ...prev]);
-    } else {
-      setSecretPosts((prev) => [newPost, ...prev]);
-    }
-
-    // Reset fields & close form
-    setNewPostCaption("");
-    setNewPostImgUrl("");
-    setNewPostTitle("");
-    setNewPostCategory("");
-    setShowAddPostForm(false);
   };
 
 
@@ -392,38 +359,6 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
     );
 
     setNewCommentText("");
-
-    // Simulate Seo-jun typing back in secret post comments!
-    setTimeout(() => {
-      setSecretPosts((posts) =>
-        posts.map((post) => {
-          if (post.id === postId) {
-            const boyfriendReaction = {
-              id: `bf-c-${Date.now()}`,
-              username: "seojun_2103",
-              text: `어이구 우리 ${userSettings.nickname}, 장난치는 거 하나는 세계 최고네ㅋㅋ 이따 집에 가만 안 둔다 진짜! 😘`,
-              time: "방금 전",
-            };
-            const finalComments = [...post.comments, boyfriendReaction];
-
-            if (selectedPost && selectedPost.id === postId) {
-              setSelectedPost({
-                ...selectedPost,
-                comments: finalComments,
-                commentsCount: finalComments.length,
-              });
-            }
-
-            return {
-              ...post,
-              comments: finalComments,
-              commentsCount: finalComments.length,
-            };
-          }
-          return post;
-        })
-      );
-    }, 1200);
   };
 
   const handleApplyPresetQuestion = (question: string) => {
