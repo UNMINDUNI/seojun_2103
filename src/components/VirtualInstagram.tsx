@@ -25,7 +25,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
     {
       id: "welcome-1",
       role: "model",
-      text: "연락 기다렸어! 얼른 2103호로 와라. 올 때 시원한 캔맥주 사오구! 🍻",
+      text: "연락 기다렸어! 얼른 집으로 와라. 올 때 시원한 캔맥주 사오구! 🍻",
       timestamp: new Date().toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" }),
     }
   ]);
