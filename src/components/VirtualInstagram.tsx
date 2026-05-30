@@ -80,7 +80,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
       likes: 45781,
       commentsCount: 0,
       date: "2025.10.12",
-      imageUrl: "https://i.postimg.cc/LXSxV6cp/5.webp",
+      imageUrl: "https://i.postimg.cc/3JcF3yKV/S10.webp",
       caption: "느와르의 새로운 한 획 《무경계》가 마침내 꿈의 스코어 1,000만을 달성했습니다! 핏빛 연기를 극한으로 선보인 서준 배우 감사패 증정.",
       comments: []
     },
@@ -93,7 +93,7 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
       likes: 29841,
       commentsCount: 0,
       date: "2023.09.04",
-      imageUrl: "https://i.postimg.cc/HkfZVt3Z/2.webp",
+      imageUrl: "https://i.postimg.cc/Hn58HLBg/S11.webp",
       caption: "서글픈 서브남신의 정석, 무영의 마지막 희생 장면 비하인드 컷입니다. 아직도 수많은 팬들의 가슴을 에이게 하는 처연하고 맹목적인 눈빛!",
       comments: []
     },
