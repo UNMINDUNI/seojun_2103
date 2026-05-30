@@ -95,7 +95,10 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
       date: "2023.09.04",
       imageUrl: "https://i.postimg.cc/Hn58HLBg/S11.webp",
       caption: "서글픈 서브남신의 정석, 무영의 마지막 희생 장면 비하인드 컷입니다. 아직도 수많은 팬들의 가슴을 에이게 하는 처연하고 맹목적인 눈빛!",
-      comments: []
+      comments: [
+        { id: "c-off4-1", username: "seojun_love", text: "이 눈빛으로 어떻게 안넘어가냐 상대역 배우가 대단하다", time: "5일 전" },
+        { id: "c-off4-1", username: "jun_fan", text: "이때 드라마보고 엄청 울었어요ㅠㅠ 서주나ㅠㅠ", time: "49일 전" }
+      ]
     },
     {
       id: "off-5",
