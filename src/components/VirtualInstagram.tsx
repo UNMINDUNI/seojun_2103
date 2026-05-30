@@ -82,7 +82,9 @@ export default function VirtualInstagram({ onBackToPortal, initialTab = "officia
       date: "2025.10.12",
       imageUrl: "https://i.postimg.cc/3JcF3yKV/S10.webp",
       caption: "느와르의 새로운 한 획 《무경계》가 마침내 꿈의 스코어 1,000만을 달성했습니다! 핏빛 연기를 극한으로 선보인 서준 배우 감사패 증정.",
-      comments: []
+      comments: [
+       { id: "c-off3-1", username: "juny_fan", text: "악역이 이렇게 섹시해도 됩니까?🥰🥰🥰", time: "6시간 전" },  
+      ]
     },
     {
       id: "off-4",
